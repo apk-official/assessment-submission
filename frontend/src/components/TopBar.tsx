@@ -1,7 +1,6 @@
 import { MoonIcon, SidebarSimpleIcon, SunDimIcon } from "@phosphor-icons/react";
 import { SidebarTrigger } from "./ui/sidebar";
-import { ModeToggle } from "./ModeToggle";
-import { useTheme } from "./theme-provider";
+import { useTheme } from "./ThemeProvider";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 /**
@@ -37,7 +36,7 @@ export default function TopBar() {
       >
         {theme === "dark" ? (<>
           <MoonIcon className="text-gray-50" /> 
-          <p>Dark Mode</p></>
+          <p>Mode: Dark</p></>
         ) : (
          <> <SunDimIcon /><p>Mode: Light</p></>
         )}

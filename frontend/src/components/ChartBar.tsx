@@ -21,7 +21,7 @@ export function ChartBar() {
   return (
     <ChartContainer config={chartConfig} className="h-80 w-full">
       <BarChart accessibilityLayer data={chartData}>
-        <CartesianGrid vertical={false} />
+        <CartesianGrid vertical={false} className="dark:bg-neutral-400" />
         <XAxis
           dataKey="question"
           tickLine={false}
@@ -29,8 +29,8 @@ export function ChartBar() {
           axisLine={false}
           tickFormatter={(value) => value.slice(0, 3)}
         />
-        <ChartTooltip content={<ChartTooltipContent />} />
-        <ChartLegend content={<ChartLegendContent />} />
+        <ChartTooltip content={<ChartTooltipContent className="text-neutral-800 dark:text-neutral-100"/>} />
+        <ChartLegend content={<ChartLegendContent />} className="text-neutral-800 dark:text-neutral-100"/>
         <Bar dataKey="score" fill="var(--color-score)" radius={4} />
       </BarChart>
     </ChartContainer>

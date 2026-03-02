@@ -1,9 +1,12 @@
 import { useState } from 'react'
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/ThemeProvider"
 // import AssessmentResults from './components/AssessmentResults'
 // import './App.css'
 import AppLayout from './layouts/AppLayout'
 import Dashboard from './features/Dashboard'
+import DashboardSkeleton from './components/DashboardSkeleton'
+import Empty from './components/Empty'
+import Error from './components/Error'
 
 function App() {
   const [instanceId, setInstanceId] = useState('d1111111-1111-1111-1111-111111111111')

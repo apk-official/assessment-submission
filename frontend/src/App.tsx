@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 // import AssessmentResults from './components/AssessmentResults'
 // import './App.css'
 import AppLayout from './layouts/AppLayout'
+import Dashboard from './features/Dashboard'
 
 function App() {
   const [instanceId, setInstanceId] = useState('d1111111-1111-1111-1111-111111111111')
@@ -30,7 +31,7 @@ function App() {
         <AssessmentResults instanceId={instanceId} />
       </main>
       </div> */}
-      <AppLayout>Hi</AppLayout>
+      <AppLayout><Dashboard/></AppLayout>
       </ThemeProvider>
   )
 }

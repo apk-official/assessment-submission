@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import AssessmentResults from './components/AssessmentResults'
-import './App.css'
+import { ThemeProvider } from "@/components/theme-provider"
+// import AssessmentResults from './components/AssessmentResults'
+// import './App.css'
+import AppLayout from './layouts/AppLayout'
 
 function App() {
   const [instanceId, setInstanceId] = useState('d1111111-1111-1111-1111-111111111111')
 
   return (
-    <div className="app">
+     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+    {/* <div className="app">
       <header className="app-header">
         <h1>Assessment Results System</h1>
         <p>Technical Interview Task</p>
@@ -26,7 +29,9 @@ function App() {
 
         <AssessmentResults instanceId={instanceId} />
       </main>
-    </div>
+      </div> */}
+      <AppLayout>Hi</AppLayout>
+      </ThemeProvider>
   )
 }
 

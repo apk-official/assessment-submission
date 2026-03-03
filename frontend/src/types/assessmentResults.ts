@@ -8,6 +8,7 @@ export interface ScoresSummary {
   total_score: number;
   max_score: number;
   percentage: number;
+  element?: string;
 }
 
 export interface QuestionAnswer {
@@ -36,8 +37,10 @@ export interface AssessmentResultsResponse {
   instance: {
     id: string;
     completed: boolean;
+    created_at: string;
     completed_at: string | null;
     element: string;
+    responder_name:string
   };
   total_questions: number;
   answered_questions: number;

@@ -1,39 +1,76 @@
-import { CheckCircleIcon, FlagBannerFoldIcon, FlagBannerIcon, XCircleIcon } from "@phosphor-icons/react";
+import {
+  CheckCircleIcon,
+  FlagBannerFoldIcon,
+  FlagBannerIcon,
+  XCircleIcon,
+} from "@phosphor-icons/react";
+import type { Insight } from "@/types/assessmentResults";
 
-export default function InsightsCard() {
-  const insights = [
-    {
-      positive_icon: <FlagBannerIcon weight="fill" size={30} color="#00a63e" />,
-      negative_icon: <FlagBannerFoldIcon weight="fill" size={30} color="#ff6467" />,
-      type: "Completion",
-      message: "You have 2 questions remaining to complete this assessment.",
-      positive: false,
-    },
-    {
-      positive_icon: <CheckCircleIcon weight="fill" size={30} color="#00a63e" />,
-      negative_icon: <XCircleIcon weight="fill" size={30} color="#ff6467" />,
-      type: "Performance",
-      message:
-        "You demonstrate strong confidence in this element of teaching practice.",
-      positive: true,
-    },
-  ];
+const iconMap = {
+  completion: {
+    positive: <FlagBannerIcon weight="fill" size={26} color="#00a63e" />,
+    negative: <FlagBannerFoldIcon weight="fill" size={26} color="#fd9a00" />,
+  },
+  performance: {
+    positive: <CheckCircleIcon weight="fill" size={26} color="#00a63e" />,
+    negative: <XCircleIcon weight="fill" size={26} color="#ff6467" />,
+  },
+} as const;
+
+export default function InsightsCard({
+  insights = [],
+}: {
+  insights?: Insight[];
+}) {
   return (
     <div className="border h-full border-gray-300 dark:border-gray-700 rounded-xl p-4 flex flex-col gap-2">
       <h3 className="text-gray-800 dark:text-gray-100">Insights</h3>
-      {insights.map((insight) => (
-        <div
-          key={insight.type}
-          className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 w-fill flex items-start justify-between gap-2"
-        >
-          {insight.positive_icon}
 
-          <div className="flex flex-col items-start justify-center">
-            <p className="text-sm font-medium text-neutral-600 dark:text-neutral-300">{insight.type}</p>
-            <p className="text-sm font-normal text-neutral-800 dark:text-neutral-100">{insight.message}</p>
-          </div>
-        </div>
-      ))}
+      {insights.length === 0 ? (
+        <p className="text-sm text-muted-foreground">No insights available.</p>
+      ) : (
+        insights.map((insight) => {
+          const key = insight.type.toLowerCase() as keyof typeof iconMap;
+          const icons = iconMap[key];
+
+          const icon = icons
+            ? insight.positive
+              ? icons.positive
+              : icons.negative
+            : insight.positive
+              ? iconMap.performance.positive
+              : iconMap.performance.negative;
+
+          return (
+            <div
+              key={`${insight.type}-${insight.message}`}
+              className={[
+                "rounded-lg p-3 flex items-start gap-3 border",
+                insight.type.toLowerCase() === "performance"
+                  ? insight.positive
+                    ? "bg-green-50 border-green-200 dark:bg-green-900/30 dark:border-green-700"
+                    : "bg-red-50 border-red-200 dark:bg-red-900/30 dark:border-red-700"
+                  : insight.type.toLowerCase() === "completion"
+                    ? insight.positive
+                      ? "bg-green-50 border-green-200 dark:bg-green-900/30 dark:border-green-700"
+                      : "bg-amber-50 border-amber-200 dark:bg-amber-900/30 dark:border-amber-700"
+                    : "",
+              ].join(" ")}
+            >
+              <div className="shrink-0">{icon}</div>
+
+              <div className="flex flex-col">
+                <p className="text-sm font-medium text-neutral-600 dark:text-neutral-300">
+                  {insight.type}
+                </p>
+                <p className="text-sm text-neutral-800 dark:text-neutral-100">
+                  {insight.message}
+                </p>
+              </div>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }

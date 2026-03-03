@@ -3,13 +3,6 @@ import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
 
-const chartData = [
-  {question: "Q1", score: 4 },
-  { question: "Q2", score: 5 },
-  { question: "Q3", score: null},
-  { question: "Q4", score: null},
-];
-
 const chartConfig = {
   score: {
     label: "score",
@@ -17,10 +10,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartBar() {
+export function ChartBar({
+  data,
+}: {
+  data: { question: string; score: number }[];
+}) {
   return (
     <ChartContainer config={chartConfig} className="h-80 w-full">
-      <BarChart accessibilityLayer data={chartData}>
+      <BarChart accessibilityLayer data={data}>
         <CartesianGrid vertical={false} className="dark:bg-neutral-400" />
         <XAxis
           dataKey="question"

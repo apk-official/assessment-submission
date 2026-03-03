@@ -14,18 +14,27 @@ import { Button } from "./ui/button";
  * Requires SidebarProvider and ThemeProvider
  * to be present higher in the component tree.
  */
-export default function TopBar() {
+interface TopBarProps {
+  instanceId: string;
+  onInstanceIdChange: (value: string) => void;
+}
+export default function TopBar({
+  instanceId,
+  onInstanceIdChange,
+}: TopBarProps) {
   const { theme, setTheme } = useTheme();
   return (
     <header className="sticky top-0 h-12 border-b border-b-gray-300 dark:border-b-gray-700 flex items-center justify-between px-2 md:px-4 lg:px-4 xl:px-4 2xl:px-10 bg-primary-foreground">
       <div className="flex items-center justify-center gap-5">
         <SidebarTrigger className="cursor-pointer dark:text-accent-foreground">
-          <SidebarSimpleIcon/>
+          <SidebarSimpleIcon />
         </SidebarTrigger>
         <Input
           placeholder="Enter Instance ID"
-          className="shadow-none border-blue-500 bg-primary-secondary font-sans font-normal"
+          className="shadow-none border-blue-500 bg-primary-secondary font-sans font-normal dark:text-neutral-200"
           aria-label="Instance ID Search Input"
+          value={instanceId}
+          onChange={(e) => onInstanceIdChange(e.target.value)}
         ></Input>
       </div>
       <Button
@@ -34,11 +43,17 @@ export default function TopBar() {
         aria-label="Toggle theme"
         className="flex items-centerjustify-center cursor-pointer font-sans font-normal dark:text-accent-foreground"
       >
-        {theme === "dark" ? (<>
-          <MoonIcon className="text-gray-50" /> 
-          <p>Mode: Dark</p></>
+        {theme === "dark" ? (
+          <>
+            <MoonIcon className="text-gray-50" />
+            <p>Mode: Dark</p>
+          </>
         ) : (
-         <> <SunDimIcon /><p>Mode: Light</p></>
+          <>
+            {" "}
+            <SunDimIcon />
+            <p>Mode: Light</p>
+          </>
         )}
       </Button>
     </header>

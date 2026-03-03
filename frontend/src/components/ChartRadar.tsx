@@ -5,18 +5,27 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "./ui/chart";
+import type { ElementScore } from "@/types/assessmentResults";
+import { useMemo } from "react";
 
-const chartData = [
-  { element: "1.1", score: 53.85 },
-];
 const chartConfig = {
   score: {
     label: "Score (%)",
     color: "var(--chart-1)",
-    },
+  },
 } satisfies ChartConfig;
 
-export default function ChartRadar() {
+export default function ChartRadar({
+  elementScores,
+}: {
+  elementScores: Record<string, ElementScore>;
+}) {
+  const chartData = useMemo(() => {
+    return Object.values(elementScores).map((e) => ({
+      element: e.element,
+      score: e.scores.percentage,
+    }));
+  }, [elementScores]);
   return (
     <ChartContainer
       config={chartConfig}
@@ -35,7 +44,7 @@ export default function ChartRadar() {
           fillOpacity={0}
           stroke="var(--color-score)"
           strokeWidth={2}
-              />
+        />
       </RadarChart>
     </ChartContainer>
   );

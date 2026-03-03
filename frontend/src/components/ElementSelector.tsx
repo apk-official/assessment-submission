@@ -7,7 +7,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function ElementSelector() {
+export default function ElementSelector({
+  element,
+}: {
+  element: string;
+}) {
   return (
     <Select defaultValue="Element 1.1">
       <SelectTrigger className="w-45 shadow-none border-blue-500 dark:text-gray-100">
@@ -15,7 +19,7 @@ export default function ElementSelector() {
       </SelectTrigger>
       <SelectContent className="border-none outline-none">
         <SelectGroup>
-          <SelectItem value="Element 1.1">Element 1.1</SelectItem>
+          <SelectItem value="Element 1.1">Element {element}</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

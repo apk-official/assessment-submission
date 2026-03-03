@@ -7,7 +7,7 @@ import {
   RadialBarChart,
 } from "recharts";
 
-const chartData = [{ completed: 50, fill: "#2563eb" }];
+
 
 const chartConfig = {
   completed: {
@@ -16,11 +16,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartRadial() {
-  const total = 100;
-  const completed = 50;
-  const percentage = (completed / total) * 100;
-  const endAngle = (percentage / 100) * 360;
+export function ChartRadial({ percentage }: { percentage: number }) {
+  const safe = Number.isFinite(percentage) ? Math.max(0, Math.min(100, percentage)) : 0;
+  const chartData = [{ completed: safe ,fill: "#2563eb"}];
+
+  const endAngle = (safe / 100) * 360;
   return (
     <ChartContainer config={chartConfig} className="h-28 w-32">
       <RadialBarChart
@@ -54,7 +54,7 @@ export function ChartRadial() {
                       y={viewBox.cy}
                       className="fill-foreground text-3xl font-medium font-sans"
                     >
-                      {percentage}%
+                      {safe}%
                     </tspan>
                     <tspan
                       x={viewBox.cx}

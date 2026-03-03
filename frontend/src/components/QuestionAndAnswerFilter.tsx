@@ -1,7 +1,9 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "./ui/label";
 
-const Options = [
+export type QAFilter = "all" | "answered" | "unanswered";
+
+const Options: { value: QAFilter; id: QAFilter; label: string }[] = [
   {
     value: "all",
     id: "all",
@@ -19,9 +21,20 @@ const Options = [
   },
 ];
 
-export default function QuestionAndAnswerFilter() {
+export default function QuestionAndAnswerFilter({
+  value,
+  onChange,
+}: {
+  value: QAFilter;
+  onChange: (value: QAFilter) => void;
+}) {
   return (
-    <RadioGroup defaultValue="all" className="flex mb-2">
+    <RadioGroup
+      defaultValue="all"
+      value={value}
+      onValueChange={onChange}
+      className="flex mb-2"
+    >
       {Options.map((option) => (
         <Label
           htmlFor={option.id}

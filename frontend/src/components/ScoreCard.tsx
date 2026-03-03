@@ -1,21 +1,15 @@
+import { AssessmentResultsResponse } from "@/types/assessmentResults";
 import ChartRadar from "./ChartRadar";
 
 
-export default function ScoreCard() {
-  const overallPercentage = 53.2;
+export default function ScoreCard({ results }: { results: AssessmentResultsResponse }) {
+   const overallPercentage = results.scores.percentage;
+  const element = results.scores.element ?? results.instance.element; // your API includes scores.element
+  const points = `${results.scores.total_score}/${results.scores.max_score}`;
   const scoreData = [
-    {
-      label: "Element",
-      value:"1.1"
-    },
-    {
-      label: "Overall Score",
-      value: `${overallPercentage}%`
-    },
-    {
-      label: "Points",
-      value:"9/15"
-    },
+     { label: "Element", value: element },
+    { label: "Overall Score", value: `${overallPercentage}%` },
+    { label: "Points", value: points },
   ]
     const getScoreColor = (percentage: number) => {
     if (percentage >= 80) return '#7ccf00'
@@ -42,7 +36,7 @@ export default function ScoreCard() {
             </ul>
             <div className="shrink-0">
               {/* prevent flex stretching */}
-              <ChartRadar />
+              <ChartRadar elementScores={results.element_scores} />
             </div>
           </div>
         </div>

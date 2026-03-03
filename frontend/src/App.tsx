@@ -34,7 +34,7 @@ function App() {
         <AssessmentResults instanceId={instanceId} />
       </main>
       </div> */}
-      <AppLayout><Dashboard/></AppLayout>
+      <AppLayout/>
       </ThemeProvider>
   )
 }

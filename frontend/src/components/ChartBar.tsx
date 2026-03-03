@@ -37,7 +37,7 @@ export function ChartBar({
   data,
 }:ChartBarProps) {
   return (
-    <ChartContainer config={chartConfig} className="h-80 w-full">
+    <ChartContainer config={chartConfig} className="h-80 w-full z-0">
       <BarChart accessibilityLayer data={data}>
         <CartesianGrid vertical={false} className="dark:bg-neutral-400" />
         <XAxis

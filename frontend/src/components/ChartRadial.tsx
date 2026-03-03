@@ -47,7 +47,7 @@ export function ChartRadial({ percentage }: ChartRadialProps) {
   const chartData = [{ completed: displayValue, fill: "#2563eb" }];
 
   return (
-    <ChartContainer config={chartConfig} className="h-28 w-32">
+    <ChartContainer config={chartConfig} className="h-28 w-32 z-0">
       <RadialBarChart
         data={chartData}
         startAngle={180}

@@ -24,7 +24,7 @@ export default function TopBar({
 }: TopBarProps) {
   const { theme, setTheme } = useTheme();
   return (
-    <header className="sticky top-0 h-12 border-b border-b-gray-300 dark:border-b-gray-700 flex items-center justify-between px-2 md:px-4 lg:px-4 xl:px-4 2xl:px-10 bg-primary-foreground">
+    <header className="sticky top-0 h-12 border-b border-b-gray-300 dark:border-b-gray-700 flex items-center justify-between px-2 md:px-4 lg:px-4 xl:px-4 2xl:px-10 bg-primary-foreground z-20">
       <div className="flex items-center justify-center gap-5">
         <SidebarTrigger className="cursor-pointer dark:text-accent-foreground">
           <SidebarSimpleIcon />

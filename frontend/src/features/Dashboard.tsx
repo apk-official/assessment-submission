@@ -94,7 +94,6 @@ export default function Dashboard({instanceId}:DashboardProps) {
     score: q.answer_value ?? 0, // null becomes 0 for chart
   }));
   }, [questions]);
-  const pdfRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <>

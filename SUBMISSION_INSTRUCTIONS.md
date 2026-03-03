@@ -4,9 +4,9 @@
 
 Before submitting, make sure you have:
 
-- [ ] Completed your specific task (TASK_FULL_STACK.md or TASK_FRONTEND.md)
-- [ ] Created a `SOLUTION.md` file in the root of your repository
-- [ ] Committed and pushed all your code to your repository
+- [x] Completed your specific task (TASK_FULL_STACK.md or TASK_FRONTEND.md)
+- [x] Created a `SOLUTION.md` file in the root of your repository
+- [x] Committed and pushed all your code to your repository
 - [ ] Tested your implementation works as expected
 
 ## SOLUTION.md Template

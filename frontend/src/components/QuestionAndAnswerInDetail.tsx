@@ -65,9 +65,9 @@ export default function QuestionAndAnswerInDetail({
         <div className="flex flex-col w-full gap-2">
           <QuestionAndAnswerFilter value={filter} onChange={setFilter} />
           <ScrollArea className="h-50">
-            // =========================== 
-            // Reflection question branch
-            //============================
+             {/* =========================== 
+              Reflection question branch
+            ============================ */}
             {filteredQuestions.map((question) =>
               question.is_reflection ? (
                 <div
@@ -103,7 +103,7 @@ export default function QuestionAndAnswerInDetail({
               ) : (
                 // =============================
                 // Likert Scale / MCQ Questions
-                //==============================
+                // ==============================
                 <div
                   key={question.question_sequence}
                   className="flex flex-col w-full gap-3"

@@ -210,8 +210,19 @@ Dark mode was implemented for accessibility and provide user with theme prefernc
 
 ### React Testing Library tests
 ## Testing
-[Explain how to test your implementation]
-[Include curl commands, URLs, or test scenarios]
+
+I implemented component tests for a few components (eg: Dashboard, CompletionCard) using Vitest. I also attempted to implement integration testing, but I was not able to complete it.
+Due to limited time, I could not complete all the planned testing. Also, because of my limited knowledge in testing, I could not finish the integration testing part. I have used AI Assistance to integration testing and some part of component testing.
+
+### Test scenarios
+##### Component
+- For Completion Card, "Total Number of Question", and "Total Number of Answered Question" appear on the screen, Given values showing on the screen.
+- For ChartBar, If the percentage render correctly
+- For Dashboard, empty component displayed when instanceId is missing, When instanceID provided, loading screen display first, after successful API fetch, display PageHeader, PageActions, CompletionCard receive correct data.
+
+##### Integration Testing
+
+- If data from API correctly processed by frontend, whether error states handle correctly, loading state trigger correctly. 
 
 ## Challenges & Solutions
 These are the challenges I have faced during the development.

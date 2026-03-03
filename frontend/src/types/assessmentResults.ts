@@ -1,16 +1,38 @@
+/**
+ * Insight
+ *
+ * Represents a contextual insight generated from assessment results.
+ * Includes:
+ * - `type`: category of insight (e.g., "performance", "completion")
+ * - `message`: human-readable description
+ * - `positive`: indicates positive or negative outcome
+ */
 export interface Insight {
   type: string;
   message: string;
   positive: boolean;
 }
-
+/**
+ * ScoresSummary
+ *
+ * Aggregated scoring information for an assessment or element.
+ * Includes total score, maximum score, calculated percentage,
+ * and optional associated element identifier.
+ */
 export interface ScoresSummary {
   total_score: number;
   max_score: number;
   percentage: number;
   element?: string;
 }
-
+/**
+ * QuestionAnswer
+ *
+ * Represents a single question and its answer details.
+ * Covers both standard and reflection-type questions.
+ * Includes metadata (sequence, type), answer state,
+ * scoring details, and optional selection/text data.
+ */
 export interface QuestionAnswer {
   question_id: string;
   question_title: string;
@@ -24,7 +46,13 @@ export interface QuestionAnswer {
   text_answer?: string | null;
   option_number?: number | null;
 }
-// Score breakdown for one assessment element.
+/**
+ * ElementScore
+ *
+ * Score breakdown for a single assessment element.
+ * Includes completion metrics, aggregated scores,
+ * and detailed question-level answers.
+ */
 export interface ElementScore {
   element: string;
   total_questions: number;
@@ -33,7 +61,16 @@ export interface ElementScore {
   scores: ScoresSummary;
   question_answers: QuestionAnswer[];
 }
-// API response for a single assessment instance.
+/**
+ * AssessmentResultsResponse
+ *
+ * Root API response structure for a single assessment instance.
+ * Contains:
+ * - Instance metadata
+ * - Overall completion and scoring summary
+ * - Element-level breakdown (keyed by element identifier)
+ * - Generated insights
+ */
 export interface AssessmentResultsResponse {
   instance: {
     id: string;

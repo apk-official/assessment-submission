@@ -14,12 +14,31 @@ const chartConfig = {
     color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
-
+type ChartRadarProps = {
+  /**
+   * Element-level scoring keyed by element identifier/name.
+   * Each entry is mapped to `{ element, score }` for plotting.
+   */
+  elementScores: Record<string, ElementScore>;
+};
+/**
+ * <ChartRadar />
+ *
+ * Renders an element comparison radar chart using assessment element scores.
+ *
+ * Responsibilities:
+ * - Transforms `elementScores` into Recharts-compatible `data` points.
+ * - Visualises each element's percentage score on a radar chart.
+ * - Provides hover tooltip details via the shared chart tooltip components.
+ *
+ * Notes:
+ * - This component is intended to compare multiple elements. If only a single
+ *   element score is provided, the radar chart will render a minimal shape and
+ *   may offer limited visual insight.
+ */
 export default function ChartRadar({
   elementScores,
-}: {
-  elementScores: Record<string, ElementScore>;
-}) {
+}:ChartRadarProps) {
   const chartData = useMemo(() => {
     return Object.values(elementScores).map((e) => ({
       element: e.element,

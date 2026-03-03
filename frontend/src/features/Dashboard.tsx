@@ -12,8 +12,35 @@ import { AssessmentResultsService } from "@/services/assessmentResult.services";
 import { AssessmentResultsResponse, QuestionAnswer } from "@/types/assessmentResults";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-
-export default function Dashboard({instanceId}) {
+type DashboardProps = {
+  /**
+   * Assessment instance identifier used to fetch results.
+   * When empty/undefined, the dashboard resets to the "empty" state.
+   */
+  instanceId?: string;
+};
+  /**
+ * <Dashboard />
+ *
+ * Fetches and presents assessment results for a given `instanceId` using a
+ * responsive card-based layout (summary cards + question list + chart).
+ *
+ * Responsibilities:
+ * - Loads assessment results from `AssessmentResultsService` when `instanceId` changes.
+ * - Handles request states (loading, error, empty/no data).
+ * - Derives view models from the API payload:
+ *   - `questions`: sorted question answers for the active element
+ *   - `scorePerQuestionData`: chart-friendly series for per-question scoring
+ * - Renders key dashboard sections (header/actions + score cards + insight cards + Question list + score per question chart).
+ *
+ * Rendering states:
+ * - Loading: `DashboardSkeleton`
+ * - Error: `Error`
+ * - No results: `Empty`
+ * - Success: full dashboard content grid
+ *
+ */
+export default function Dashboard({instanceId}:DashboardProps) {
  
   const [results, setResults] = useState<AssessmentResultsResponse | null>(
     null,
@@ -76,7 +103,7 @@ export default function Dashboard({instanceId}) {
       {!loading && error && <Error error={error } />}
       {!loading && !error && !results && <Empty />}
       {!loading && !error && results && (
-        <div className="flex h-full flex-col gap-6" ref={pdfRef}>
+        <div className="flex h-full flex-col gap-6">
           <div className="shrink-0">
             <PageHeader instance={results.instance}/>
             <PageActions element={results.instance.element} results={results}/>

@@ -1,5 +1,20 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-
+/**
+ ** <PdfCompletionChart />
+ *
+ * Renders a completion progress indicator for PDF reports.
+ *
+ ** Responsibilities:
+ * - Displays the numeric completion percentage.
+ * - Renders a horizontal progress bar representing completion.
+ * - Ensures safe percentage values via internal clamping (0–100).
+ *
+ ** Notes:
+ * - Designed specifically for `@react-pdf/renderer`.
+ * - Uses inline width percentage to simulate a progress fill.
+ * - Pure presentational component with no side effects.
+ * - This component was created with the help of AI assistance and reviewed to ensure alignment with project requirements.
+ */
 const styles = StyleSheet.create({
   wrap: { gap: 6 },
   percent: { fontSize: 22, fontWeight: 700 },

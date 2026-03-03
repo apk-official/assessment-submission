@@ -4,7 +4,24 @@ import TopBar from "@/components/TopBar";
 import { useState } from "react";
 import Dashboard from "@/features/Dashboard";
 import { useDebounce } from "@/hooks/useDebounce";
-
+/**
+ * <AppLayout />
+ *
+ * Provides the top-level application shell layout.
+ *
+ * Responsibilities:
+ * - Sets up the sidebar context (`SidebarProvider`) and renders the app sidebar.
+ * - Renders the main content scaffold (TopBar + main content area).
+ * - Owns the `instanceId` state used to scope the dashboard data/view.
+ * - Debounces `instanceId` changes to avoid triggering expensive dashboard updates on every keystroke.
+ *
+ * Data flow:
+ * - `instanceId` is controlled here and passed to `TopBar` for editing.
+ * - A debounced `instanceId` is passed to `Dashboard` to drive data loading/rendering.
+ *
+ * Notes:
+ * - `defaultOpen={false}` keeps the sidebar collapsed by default (useful for smaller screens / first-load UX).
+ */
 export default function AppLayout() {
   const [instanceId, setInstanceId] = useState(
     "d1111111-1111-1111-1111-111111111111",

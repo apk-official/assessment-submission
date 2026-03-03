@@ -1,5 +1,20 @@
 import EmptyIllustrationDark from "@/assets/empty_dark.svg"
 import EmptyIllustration from "@/assets/empty.svg"
+
+/**
+ ** <Empty />
+ *
+ * Displays the initial empty state for the dashboard
+ * when no assessment instance is selected.
+ *
+ ** Responsibilities:
+ * - Renders light/dark illustration variants.
+ * - Guides the user to enter an assessment ID.
+ *
+ ** Notes:
+ * - Pure presentational component.
+ * - Uses Tailwind dark mode utilities to toggle illustrations.
+ */
 export default function Empty() {
   return (
      <div className="flex flex-col w-full h-full items-center justify-center gap-4">

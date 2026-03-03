@@ -7,34 +7,46 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import {
-  XCircleIcon,
-} from "@phosphor-icons/react";
+import { XCircleIcon } from "@phosphor-icons/react";
 import QuestionAndAnswerFilter from "./QuestionAndAnswerFilter";
 import { QuestionAnswer } from "@/types/assessmentResults";
 import { ScrollArea } from "./ui/scroll-area";
 import { useMemo, useState } from "react";
 import type { QAFilter } from "./QuestionAndAnswerFilter";
 
-
+type QuestionAndAnswerInDetailProps = {
+  /** Ordered list of questions (reflection + standard) to display in the dialog. */
+  questions: QuestionAnswer[];
+};
+/**
+ ** <QuestionAndAnswerInDetail />
+ *
+ * Renders a modal dialog that shows questions and answers in a detailed, scrollable view.
+ *
+ ** Responsibilities:
+ * - Opens a dialog to show all questions in detail.
+ * - Supports filtering (all / answered / unanswered).
+ * - Renders reflection prompts and standard questions with appropriate UI treatments.
+ *
+ ** Notes:
+ * - Questions are expected to be pre-sorted by `question_sequence`.
+ */
 export default function QuestionAndAnswerInDetail({
   questions,
-}: {
-  questions: QuestionAnswer[];
-  }) {
+}: QuestionAndAnswerInDetailProps) {
   const [filter, setFilter] = useState<QAFilter>("all");
 
   const filteredQuestions = useMemo(() => {
-  switch (filter) {
-    case "answered":
-      return questions.filter((q) => q.is_answered);
-    case "unanswered":
-      return questions.filter((q) => !q.is_answered);
-    default:
-      return questions;
-  }
+    switch (filter) {
+      case "answered":
+        return questions.filter((q) => q.is_answered);
+      case "unanswered":
+        return questions.filter((q) => !q.is_answered);
+      default:
+        return questions;
+    }
   }, [questions, filter]);
-  
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -51,8 +63,11 @@ export default function QuestionAndAnswerInDetail({
           <DialogTitle>Question and Answer</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col w-full gap-2">
-          <QuestionAndAnswerFilter value={filter} onChange={setFilter}/>
+          <QuestionAndAnswerFilter value={filter} onChange={setFilter} />
           <ScrollArea className="h-50">
+            // =========================== 
+            // Reflection question branch
+            //============================
             {filteredQuestions.map((question) =>
               question.is_reflection ? (
                 <div
@@ -63,16 +78,21 @@ export default function QuestionAndAnswerInDetail({
                     {question.question_sequence}) {question.reflection_prompt}
                   </h3>
                   {question.is_answered ? (
+                    // Show reflection answer if answered
                     <div className="flex items-center justify-start w-full border  bg-neutral-200 dark:bg-neutral-700 border-none  p-2 gap-1 rounded-xl text-sm">
                       <p className="dark:text-gray-300">
                         {question.answer_text}
                       </p>
                     </div>
                   ) : (
+                      // Indicate reflection question is not answered
                     <div className="flex items-center justify-start w-full p-2 gap-2 text-sm">
-                      <p className=" flex items-center justify-center text-red-600 dark:text-red-600"><XCircleIcon size={20} weight="fill"/> Not Answered</p>
+                      <p className=" flex items-center justify-center text-red-600 dark:text-red-600">
+                        <XCircleIcon size={20} weight="fill" /> Not Answered
+                      </p>
                     </div>
                   )}
+                  // Indicate the type of question is reflection
                   <Badge
                     className="w-fit rounded-full border-amber-300 bg-amber-100 dark:text-gray-900 dark:bg-amber-300 dark:border-amber-200"
                     variant="outline"
@@ -81,6 +101,9 @@ export default function QuestionAndAnswerInDetail({
                   </Badge>
                 </div>
               ) : (
+                // =============================
+                // Likert Scale / MCQ Questions
+                //==============================
                 <div
                   key={question.question_sequence}
                   className="flex flex-col w-full gap-3"
@@ -88,23 +111,33 @@ export default function QuestionAndAnswerInDetail({
                   <h3 className="mt-2">
                     {question.question_sequence}) {question.question_title}
                   </h3>
-                  {question.is_answered ? (
+                    {question.is_answered ? (
+                      // Show selected option and answer text
                     <div className="flex items-center justify-start w-full border  bg-neutral-200 dark:bg-neutral-700 border-none  p-2 gap-2 rounded-xl text-sm">
                       <p className="dark:text-gray-300">
+                        Option: {question.option_number} -{" "}
                         {question.answer_text}
                       </p>
                     </div>
-                  ) : (
+                    ) : (
+                        // Indicate question is not answered
                     <div className="flex items-center justify-start w-full p-2 gap-2 text-sm">
-                      <p className=" flex items-center justify-center text-red-600 dark:text-red-600"><XCircleIcon size={20} weight="fill"/> Not Answered</p>
+                      <p className=" flex items-center justify-center text-red-600 dark:text-red-600">
+                        <XCircleIcon size={20} weight="fill" /> Not Answered
+                      </p>
                     </div>
                   )}
-                  {question.is_answered ?(<Badge
-                    className="w-fit rounded-full border-amber-300 bg-amber-100 dark:text-gray-900 dark:bg-amber-300 dark:border-amber-200"
-                    variant="outline"
-                  >
-                    Score: {question.answer_value}/{question.max_score}
-                  </Badge>):""}
+                    {question.is_answered ? (
+                      // Display score badge when answered
+                    <Badge
+                      className="w-fit rounded-full border-amber-300 bg-amber-100 dark:text-gray-900 dark:bg-amber-300 dark:border-amber-200"
+                      variant="outline"
+                    >
+                      Score: {question.answer_value}/{question.max_score}
+                    </Badge>
+                  ) : (
+                    ""
+                  )}
                 </div>
               ),
             )}

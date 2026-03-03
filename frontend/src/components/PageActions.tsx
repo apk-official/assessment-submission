@@ -4,14 +4,32 @@ import { Button } from "./ui/button";
 import { AssessmentResultsResponse } from "@/types/assessmentResults";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import AssessmentReportPdf from "./pdf/AssesmentReportPdf";
+type PageActionsProps = {
+  /** Currently selected assessment element */
+  element: string;
 
+  /** Full assessment results used for PDF generation */
+  results: AssessmentResultsResponse;
+};
+/**
+ * <PageActions />
+ *
+ * Provides contextual actions for the dashboard header section.
+ *
+ * Responsibilities:
+ * - Renders the `ElementSelector` for switching assessment elements.
+ * - Enables exporting the current assessment results as a PDF.
+ * - Handles PDF loading state via `PDFDownloadLink` render prop.
+ *
+ * Notes:
+ * - The exported document is generated using `AssessmentReportPdf`.
+ * - File name is currently static ("assessment-results.pdf").
+ * - Pure UI/action component — does not own or mutate assessment state.
+ */
 export default function PageActions({
   element,
   results,
-}: {
-    element: string;
-  results: AssessmentResultsResponse;
-}) {
+}: PageActionsProps) {
   return (
       <div className="w-full flex items-center justify-between mt-2">
       <ElementSelector element={element} />

@@ -19,7 +19,21 @@ const initialState: ThemeProviderState = {
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
-
+/**
+ * <ThemeProvider />
+ *
+ * App-level theme provider (light/dark) based on the shadcn/ui pattern.
+ *
+ * Responsibilities:
+ * - Reads the persisted theme from `localStorage` (via `storageKey`) or uses `defaultTheme`.
+ * - Applies the active theme by toggling `light` / `dark` classes on `document.documentElement`.
+ * - Supports `system` mode by following the OS preference via `matchMedia`.
+ * - Exposes `theme` and `setTheme` via context for consumption by `useTheme()`.
+ *
+ * Notes:
+ * - Sourced from shadcn/ui with project-specific defaults (e.g., storage key).
+ * - `setTheme` persists the selected theme into `localStorage`.
+ */
 export function ThemeProvider({
   children,
   defaultTheme = "system",

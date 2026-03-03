@@ -16,12 +16,34 @@ const iconMap = {
     negative: <XCircleIcon weight="fill" size={26} color="#ff6467" />,
   },
 } as const;
-
-export default function InsightsCard({
-  insights = [],
-}: {
+type InsightsCardProps = {
+  /**
+   * List of generated assessment insights.
+   * Each insight contains a type, message, and positivity indicator.
+   */
   insights?: Insight[];
-}) {
+};
+/**
+ * <InsightsCard />
+ *
+ * Displays contextual assessment insights with visual indicators.
+ *
+ * Responsibilities:
+ * - Renders a list of insights returned from the assessment results.
+ * - Maps insight `type` and `positive` state to appropriate icons.
+ * - Applies contextual background and border styles based on insight category.
+ * - Gracefully handles empty insight lists.
+ *
+ * Visual Behavior:
+ * - "performance" insights use green/red styling.
+ * - "completion" insights use green/amber styling.
+ * - Unknown types fall back to performance icon logic.
+ *
+ * Notes:
+ * - Pure presentational component.
+ * - Assumes `insight.type` values correspond to keys in `iconMap`.
+ */
+export default function InsightsCard({ insights = [] }: InsightsCardProps) {
   return (
     <div className="border h-full border-gray-300 dark:border-gray-700 rounded-xl p-4 flex flex-col gap-2">
       <h3 className="text-gray-800 dark:text-gray-100">Insights</h3>

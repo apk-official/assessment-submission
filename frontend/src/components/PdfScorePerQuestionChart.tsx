@@ -11,8 +11,32 @@ const styles = StyleSheet.create({
   scoreText: { width: 60, fontSize: 10, textAlign: "right", color: "#111827" },
   muted: { color: "#6b7280" },
 });
-
-export default function PdfScorePerQuestionChart({ data }: { data: Row[] }) {
+type PdfScorePerQuestionChartProps = {
+  /**
+   * Array of per-question scoring data.
+   * Each row includes a label, score, and maximum possible score.
+   */
+  data: Row[];
+};
+/**
+ * <PdfScorePerQuestionChart />
+ *
+ * Renders a per-question score breakdown for PDF reports using
+ * horizontal progress bars.
+ *
+ * Responsibilities:
+ * - Displays each question label.
+ * - Calculates proportional fill width based on score/max ratio.
+ * - Handles null or missing scores gracefully.
+ * - Displays numeric score alongside the visual bar.
+ *
+ * Notes:
+ * - Designed specifically for `@react-pdf/renderer`.
+ * - Score ratios are clamped between 0 and 1 to ensure safe rendering.
+ * - Null scores are displayed as muted placeholders ("—").
+ * - This component was created with the help of AI assistance and reviewed to ensure alignment with project requirements.
+ */
+export default function PdfScorePerQuestionChart({ data }: PdfScorePerQuestionChartProps) {
   return (
     <View style={styles.wrap}>
       {data.map((r) => {

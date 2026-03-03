@@ -1,5 +1,24 @@
 import ErrorIllustration from "@/assets/error.svg"
-export default function Error({ error }: { error: string }) {
+
+type ErrorProps = {
+  /** Error message to display to the user */
+  error: string;
+};
+/**
+ * <Error />
+ *
+ * Displays a user-friendly error state with an illustration and message.
+ *
+ * Responsibilities:
+ * - Renders a visual error illustration.
+ * - Displays a contextual error message.
+ * - Falls back to a generic message if none is provided.
+ *
+ * Notes:
+ * - Pure presentational component.
+ * - Intended for use in data-fetching or failure states.
+ */
+export default function Error({ error }:ErrorProps) {
   // Safely extract error message
   return (
       <div className="flex flex-col w-full h-full items-center justify-center gap-4">

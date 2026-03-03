@@ -20,17 +20,33 @@ const Options: { value: QAFilter; id: QAFilter; label: string }[] = [
     label: "Unanswered",
   },
 ];
+type QuestionAndAnswerFilterProps = {
+  /** Currently selected filter value */
+  value: QAFilter;
 
+  /** Callback triggered when filter selection changes */
+  onChange: (value: QAFilter) => void;
+};
+/**
+ ** <QuestionAndAnswerFilter />
+ *
+ * Provides filter controls for the detailed question view.
+ *
+ ** Responsibilities:
+ * - Renders radio-based filter options (All / Answered / Unanswered).
+ * - Controls the active filter via a controlled `value` prop.
+ * - Notifies parent component of filter changes via `onChange`.
+ *
+ ** Notes:
+ * - Fully controlled component (state managed by parent).
+ * - Styling reflects checked and focus states for improved accessibility.
+ */
 export default function QuestionAndAnswerFilter({
   value,
   onChange,
-}: {
-  value: QAFilter;
-  onChange: (value: QAFilter) => void;
-}) {
+}:QuestionAndAnswerFilterProps) {
   return (
     <RadioGroup
-      defaultValue="all"
       value={value}
       onValueChange={onChange}
       className="flex mb-2"

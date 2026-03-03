@@ -21,6 +21,7 @@ export interface QuestionAnswer {
   is_answered: boolean;
   answer_value: number | null;
   answer_text: string | null;
+  text_answer?: string | null;
   option_number?: number | null;
 }
 // Score breakdown for one assessment element.

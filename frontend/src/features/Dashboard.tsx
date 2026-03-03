@@ -69,26 +69,21 @@ export default function Dashboard({instanceId}) {
   }, [questions]);
   const pdfRef = useRef<HTMLDivElement | null>(null);
 
-  const handleExportPdf = async () => {
-    if (!pdfRef.current) return;
-    const { exportElementToPdf } = await import("@/lib/exportToPdf");
-    await exportElementToPdf(pdfRef.current, "assessment-results.pdf");
-  };
   return (
     <>
       {/* states */}
       {loading && <DashboardSkeleton />}
-      {!loading && error && <Error />}
+      {!loading && error && <Error error={error } />}
       {!loading && !error && !results && <Empty />}
       {!loading && !error && results && (
         <div className="flex h-full flex-col gap-6" ref={pdfRef}>
           <div className="shrink-0">
             <PageHeader instance={results.instance}/>
-            <PageActions element={results.instance.element} onExportPdf={handleExportPdf}/>
+            <PageActions element={results.instance.element} results={results}/>
           </div>
           {/* Grid Layout */}
           <div className="flex-1">
-            <div className="grid min-h-full lg:h-full gap-3 lg:gap-6 grid-cols-3 grid-rows-16 lg:grid-cols-6 lg:grid-rows-6">
+            <div className="grid min-h-full lg:h-full gap-3 lg:gap-6 grid-cols-3 grid-rows-14 lg:grid-cols-6 lg:grid-rows-6">
               {/* div 1 */}
               <div className="col-span-3 row-span-2 lg:col-span-2 lg:row-start-1">
                 <CompletionCard  totalQuestions={results.total_questions}

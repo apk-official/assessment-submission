@@ -25,8 +25,8 @@ export default function CompletionCard({
           {/* Total Answered Questions  */}
           <li className="flex items-center justify-start list-disc">
             <div className="flex flex-col items-start justify-start">
-               <p className="text-sm text-neutral-500 dark:text-neutral-300">Total No. of {answeredQuestions}</p>
-            <p className="text-lg font-medium text-neutral-800 dark:text-neutral-100">2</p> 
+               <p className="text-sm text-neutral-500 dark:text-neutral-300">Total No. of Answered Questions</p>
+            <p className="text-lg font-medium text-neutral-800 dark:text-neutral-100">{answeredQuestions}</p> 
             </div>
                 
           </li>

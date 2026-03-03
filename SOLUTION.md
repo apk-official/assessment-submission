@@ -4,7 +4,7 @@
 Frontend
 
 ## Time Spent
-[Approximate hours]
+~ 30 hours
 
 ## Approach
 ### Research and Design

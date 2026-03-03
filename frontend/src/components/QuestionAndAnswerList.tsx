@@ -34,7 +34,7 @@ export default function QuestionAndAnswerList({
 }:QuestionAndAnswerListProps) {
   return (
     <Item className="p-0 w-full mt-2">
-  {questions.map((question)=>(<ItemContent className="p-2 rounded-md w-full bg-neutral-100 dark:bg-neutral-800 gap-2">
+  {questions.map((question)=>(<ItemContent key={question.question_id} className="p-2 rounded-md w-full bg-neutral-100 dark:bg-neutral-800 gap-2">
     <ItemTitle className="text-neutral-800 dark:text-neutral-100">{question.question_sequence }) {question.question_title }</ItemTitle>
   </ItemContent>))}
 </Item>
